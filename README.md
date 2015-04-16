@@ -2351,31 +2351,10 @@ Unit testing helps maintain clean code, as such I included some of my recommenda
   ![Testing Tools](https://raw.githubusercontent.com/johnpapa/angular-styleguide/master/assets/testing-tools.png)
 
 ### Organizing Tests
-###### [Style [Y197](#style-y197)]
+###### [Style [Y197-1](#style-y197-1)]
 
-  - Place unit test files (specs) side-by-side with your client code. Place specs that cover server integration or test multiple components in a separate `tests` folder.
-
-    *Why?*: Unit tests have a direct correlation to a specific component and file in source code.
-
-    *Why?*: It is easier to keep them up to date since they are always in sight. When coding whether you do TDD or test during development or test after development, the specs are side-by-side and never out of sight nor mind, and thus more likely to be maintained which also helps maintain code coverage.
-
-    *Why?*: When you update source code it is easier to go update the tests at the same time.
-
-    *Why?*: Placing them side-by-side makes it easy to find them and easy to move them with the source code if you move the source.
-
-    *Why?*: Having the spec nearby makes it easier for the source code reader to learn how the component is supposed to be used and to discover its known limitations.
-
-    *Why?*: Separating specs so they are not in a distributed build is easy with grunt or gulp.
-
-    ```
-    /src/client/app/customers/customer-detail.controller.js
-                             /customer-detail.controller.spec.js
-                             /customers.controller.spec.js
-                             /customers.controller-detail.spec.js
-                             /customers.module.js
-                             /customers.route.js
-                             /customers.route.spec.js
-    ```
+ There is a specific folder structure for Javascript tests in our organization:  UnitTest\Source\JavaScript
+  
 
 **[Back to top](#table-of-contents)**
 
@@ -2959,6 +2938,7 @@ _tldr; Use this guide. Attributions are appreciated._
 ## Changes
 
  Changes from original project guidelines: 
+ 
  Removed:
  
 [Style Y091]
