@@ -55,6 +55,7 @@ While this guide explains the *what*, *why* and *how*, I find it helpful to see 
   1. [Angular Docs](#angular-docs)
   1. [Contributing](#contributing)
   1. [License](#license)
+  1. [Changes](#changes)
 
 ## Single Responsibility
 
@@ -1489,112 +1490,7 @@ While this guide explains the *what*, *why* and *how*, I find it helpful to see 
     angular.module('app').controller('Dashboard', d);function d(a, b) { }
     ```
 
-### Manually Identify Dependencies
-###### [Style [Y091](#style-y091)]
 
-  - Use `$inject` to manually identify your dependencies for Angular components.
-
-    *Why?*: This technique mirrors the technique used by [`ng-annotate`](https://github.com/olov/ng-annotate), which I recommend for automating the creation of minification safe dependencies. If `ng-annotate` detects injection has already been made, it will not duplicate it.
-
-    *Why?*: This safeguards your dependencies from being vulnerable to minification issues when parameters may be mangled. For example, `common` and `dataservice` may become `a` or `b` and not be found by Angular.
-
-    *Why?*: Avoid creating in-line dependencies as long lists can be difficult to read in the array. Also it can be confusing that the array is a series of strings while the last item is the component's function.
-
-    ```javascript
-    /* avoid */
-    angular
-        .module('app')
-        .controller('Dashboard',
-            ['$location', '$routeParams', 'common', 'dataservice',
-                function Dashboard($location, $routeParams, common, dataservice) {}
-            ]);
-    ```
-
-    ```javascript
-    /* avoid */
-    angular
-      .module('app')
-      .controller('Dashboard',
-          ['$location', '$routeParams', 'common', 'dataservice', Dashboard]);
-
-    function Dashboard($location, $routeParams, common, dataservice) {
-    }
-    ```
-
-    ```javascript
-    /* recommended */
-    angular
-        .module('app')
-        .controller('Dashboard', Dashboard);
-
-    Dashboard.$inject = ['$location', '$routeParams', 'common', 'dataservice'];
-
-    function Dashboard($location, $routeParams, common, dataservice) {
-    }
-    ```
-
-    Note: When your function is below a return statement the `$inject` may be unreachable (this may happen in a directive). You can solve this by moving the Controller outside of the directive.
-
-    ```javascript
-    /* avoid */
-    // inside a directive definition
-    function outer() {
-        var ddo = {
-            controller: DashboardPanelController,
-            controllerAs: 'vm'
-        };
-        return ddo;
-
-        DashboardPanelController.$inject = ['logger']; // Unreachable
-        function DashboardPanelController(logger) {
-        }
-    }
-    ```
-
-    ```javascript
-    /* recommended */
-    // outside a directive definition
-    function outer() {
-        var ddo = {
-            controller: DashboardPanelController,
-            controllerAs: 'vm'
-        };
-        return ddo;
-    }
-
-    DashboardPanelController.$inject = ['logger'];
-    function DashboardPanelController(logger) {
-    }
-    ```
-
-### Manually Identify Route Resolver Dependencies
-###### [Style [Y092](#style-y092)]
-
-  - Use `$inject` to manually identify your route resolver dependencies for Angular components.
-
-    *Why?*: This technique breaks out the anonymous function for the route resolver, making it easier to read.
-
-    *Why?*: An `$inject` statement can easily precede the resolver to handle making any dependencies minification safe.
-
-    ```javascript
-    /* recommended */
-    function config($routeProvider) {
-        $routeProvider
-            .when('/avengers', {
-                templateUrl: 'avengers.html',
-                controller: 'AvengersController',
-                controllerAs: 'vm',
-                resolve: {
-                    moviesPrepService: moviesPrepService
-                }
-            });
-    }
-
-    moviesPrepService.$inject = ['movieService'];
-    function moviesPrepService(movieService) {
-        return movieService.getMovies();
-    }
-    ```
 
 **[Back to top](#table-of-contents)**
 
@@ -3059,6 +2955,18 @@ Open an issue first to discuss potential changes/additions. If you have question
 ## License
 
 _tldr; Use this guide. Attributions are appreciated._
+
+## Changes
+
+ Changes from original project guidelines: 
+ Removed:
+ 
+[Style Y091]
+[Style Y092]
+We use a gulp task to add minification-safe injections.
+
+[Style Y197]
+There is a specific folder structure for Javascript tests in our organization:  UnitTest\Source\JavaScript
 
 ### Copyright
 
