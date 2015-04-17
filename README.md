@@ -2961,6 +2961,7 @@ We use a gulp task to add minification-safe injections.
 There is a specific folder structure for Javascript tests in our organization:  UnitTest\Source\JavaScript
 
 Added:
+
 [Style S197-1] Folder structure for organization's unit tests
 [Style S421] Localization
 
