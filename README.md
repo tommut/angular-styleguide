@@ -52,6 +52,7 @@ While this guide explains the *what*, *why* and *how*, I find it helpful to see 
   1. [Routing](#routing)
   1. [Task Automation](#task-automation)
   1. [Filters](#filters)
+  1. [Localization](#localization)
   1. [Angular Docs](#angular-docs)
   1. [Contributing](#contributing)
   1. [License](#license)
@@ -2351,7 +2352,7 @@ Unit testing helps maintain clean code, as such I included some of my recommenda
   ![Testing Tools](https://raw.githubusercontent.com/johnpapa/angular-styleguide/master/assets/testing-tools.png)
 
 ### Organizing Tests
-###### [Style [Y197-1](#style-y197-1)]
+###### [Style [A197-1](#style-A197-1)]
 
  There is a specific folder structure for Javascript tests in our organization:  UnitTest\Source\JavaScript
   
@@ -2917,6 +2918,17 @@ Use [Gulp](http://gulpjs.com) or [Grunt](http://gruntjs.com) for creating automa
 
 **[Back to top](#table-of-contents)**
 
+
+## Localization
+
+###### [Style [S421](#style-s421)]
+
+  - All end-user visible strings in HTML and in controllers/services should be localized.
+
+    *Why?*: Localization is required for multiple languages, and strings need to be externalized.  We make use of ResourceService to reference localized strings from a JSON file loaded at runtime based on client locale.
+
+**[Back to top](#table-of-contents)**
+
 ## Angular docs
 For anything else, API reference, check the [Angular documentation](//docs.angularjs.org/api).
 
@@ -2947,6 +2959,10 @@ We use a gulp task to add minification-safe injections.
 
 [Style Y197]
 There is a specific folder structure for Javascript tests in our organization:  UnitTest\Source\JavaScript
+
+Added:
+[Style S197-1] Folder structure for organization's unit tests
+[Style S421] Localization
 
 ### Copyright
 
